@@ -22,7 +22,7 @@ nodes.
 
 %description -l pl
 Sterownik GNBS (global network block device) jest podobny do innych
-sterownikow sieciowych urz±dzeñ blokowych. Urz±dzenia wyeksportowane
+sterowników sieciowych urz±dzeñ blokowych. Urz±dzenia wyeksportowane
 przez serwery GNBD mog± byæ u¿ywane przez wielu klientów, co czyni
 sterownik nadaj±cym siê do u¿ywania w grupie wêz³ów GFS.
 
