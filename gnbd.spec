@@ -1,16 +1,12 @@
 Summary:	Block device driver to share storage to many machines over a network
 Summary(pl):	Sterownik urz±dzenia blokowego do dzielenia pamiêci miêdzy maszynami w sieci
 Name:		gnbd
-Version:	1.0
-%define	bver	pre13
-Release:	0.%{bver}.1
+Version:	1.01.00
+Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	http://people.redhat.com/cfeist/cluster/tgz/%{name}-%{version}-%{bver}.tar.gz
+Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
 # Source0-md5:	5b740659fd2930ce6da40b2cfe47f7df
-# from gnbd-kernel CVS
-Source1:	gnbd.h
-# NoSource1-md5: f3e7cfe9f6a3c73e314488d6fea0957b (rev. 1.2)
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	magma-devel
 BuildRequires:	perl-base
@@ -31,15 +27,16 @@ przez serwery GNBD mog± byæ u¿ywane przez wielu klientów, co czyni
 sterownik nadaj±cym siê do u¿ywania w grupie wêz³ów GFS.
 
 %prep
-%setup -q -n %{name}-%{version}-%{bver}
+%setup -q -n cluster-%{version}
+install -d %{name}/include/linux
+install %{name}-kernel/src/gnbd.h %{name}/include/linux
 
-install -d include/linux
-cp %{SOURCE1} include/linux
-
+cd %{name}
 %{__perl} -pi -e 's/-Wall/%{rpmcflags} -Wall/' make/defines.mk.input
 %{__perl} -pi -e 's/-O2 //' {client,server,tools/gnbd_{export,import}}/Makefile
 
 %build
+cd %{name}
 ./configure \
 	--incdir=%{_includedir} \
 	--libdir=%{_libdir} \
@@ -51,6 +48,7 @@ cp %{SOURCE1} include/linux
 
 %install
 rm -rf $RPM_BUILD_ROOT
+cd %{name}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
