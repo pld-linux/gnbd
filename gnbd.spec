@@ -6,7 +6,7 @@ Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
-# Source0-md5:	5b740659fd2930ce6da40b2cfe47f7df
+# Source0-md5:	e98551b02ee8ed46ae0ab8fca193d751
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	magma-devel
 BuildRequires:	perl-base
