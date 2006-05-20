@@ -7,10 +7,10 @@ License:	GPL v2
 Group:		Applications/System
 Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
 # Source0-md5:	131c34c8b66d8d7d74384839ed4091d0
+Patch0:		%{name}-nolibsysfs.patch
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	magma-devel
 BuildRequires:	perl-base
-BuildRequires:	sysfsutils-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
@@ -29,6 +29,7 @@ sterownik nadaj±cym siê do u¿ywania w grupie wêz³ów GFS.
 
 %prep
 %setup -q -n cluster-%{version}
+%patch0 -p1
 install -d %{name}/include/linux
 install %{name}-kernel/src/gnbd.h %{name}/include/linux
 
