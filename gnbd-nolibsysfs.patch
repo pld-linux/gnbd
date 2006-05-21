@@ -116,3 +116,14 @@ diff -u -r1.5.2.2 -r1.5.2.3
    return name;
  }
  
+--- cluster-1.02.00/gnbd/tools/gnbd_export/Makefile.orig	2006-05-22 00:44:22.000000000 +0200
++++ cluster-1.02.00/gnbd/tools/gnbd_export/Makefile	2006-05-22 00:44:30.000000000 +0200
+@@ -22,7 +22,7 @@
+ 	-I$(top_srcdir)/utils -I${top_srcdir}/config \
+ 	-I${incdir}
+ 
+-LDLIBS+= -L${libdir} -lmagma -ldl -lpthread -lsysfs
++LDLIBS+= -L${libdir} -lmagma -ldl -lpthread
+ 
+ include ${top_srcdir}/make/defines.mk
+ 
