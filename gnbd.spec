@@ -1,13 +1,12 @@
 Summary:	Block device driver to share storage to many machines over a network
 Summary(pl):	Sterownik urz±dzenia blokowego do dzielenia pamiêci miêdzy maszynami w sieci
 Name:		gnbd
-Version:	1.02.00
+Version:	1.03.00
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
-# Source0-md5:	131c34c8b66d8d7d74384839ed4091d0
-Patch0:		%{name}-nolibsysfs.patch
+# Source0-md5:	8eea23df70d2007c4fb8c234cfea49cf
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	magma-devel
 BuildRequires:	perl-base
@@ -29,7 +28,6 @@ sterownik nadaj±cym siê do u¿ywania w grupie wêz³ów GFS.
 
 %prep
 %setup -q -n cluster-%{version}
-%patch0 -p1
 install -d %{name}/include/linux
 install %{name}-kernel/src/gnbd.h %{name}/include/linux
 
