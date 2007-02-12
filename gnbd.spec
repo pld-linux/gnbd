@@ -1,5 +1,5 @@
 Summary:	Block device driver to share storage to many machines over a network
-Summary(pl):	Sterownik urz±dzenia blokowego do dzielenia pamiêci miêdzy maszynami w sieci
+Summary(pl.UTF-8):   Sterownik urzÄ…dzenia blokowego do dzielenia pamiÄ™ci miÄ™dzy maszynami w sieci
 Name:		gnbd
 Version:	1.03.00
 Release:	1
@@ -20,11 +20,11 @@ network block device drivers. Devices exported by GNBD servers can be
 used by multiple clients making it suitable for use by a group of GFS
 nodes.
 
-%description -l pl
+%description -l pl.UTF-8
 Sterownik GNBS (global network block device) jest podobny do innych
-sterowników sieciowych urz±dzeñ blokowych. Urz±dzenia wyeksportowane
-przez serwery GNBD mog± byæ u¿ywane przez wielu klientów, co czyni
-sterownik nadaj±cym siê do u¿ywania w grupie wêz³ów GFS.
+sterownikÃ³w sieciowych urzÄ…dzeÅ„ blokowych. UrzÄ…dzenia wyeksportowane
+przez serwery GNBD mogÄ… byÄ‡ uÅ¼ywane przez wielu klientÃ³w, co czyni
+sterownik nadajÄ…cym siÄ™ do uÅ¼ywania w grupie wÄ™zÅ‚Ã³w GFS.
 
 %prep
 %setup -q -n cluster-%{version}
