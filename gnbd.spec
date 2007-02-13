@@ -1,5 +1,5 @@
 Summary:	Block device driver to share storage to many machines over a network
-Summary(pl.UTF-8):   Sterownik urządzenia blokowego do dzielenia pamięci między maszynami w sieci
+Summary(pl.UTF-8):	Sterownik urządzenia blokowego do dzielenia pamięci między maszynami w sieci
 Name:		gnbd
 Version:	1.03.00
 Release:	1
