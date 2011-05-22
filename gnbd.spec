@@ -1,15 +1,16 @@
 Summary:	Block device driver to share storage to many machines over a network
 Summary(pl.UTF-8):	Sterownik urządzenia blokowego do dzielenia pamięci między maszynami w sieci
 Name:		gnbd
-Version:	2.00.00
+Version:	2.03.10
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
-# Source0-md5:	2ef3f4ba9d3c87b50adfc9b406171085
+# Source0-md5:	379b560096e315d4b52e238a5c72ba4a
 URL:		http://sources.redhat.com/cluster/gnbd/
-BuildRequires:	cman-devel >= 2
+BuildRequires:	cman-devel >= 2.03.10
 BuildRequires:	perl-base
+Requires:	cman-libs >= 2.03.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
@@ -28,31 +29,27 @@ sterownik nadającym się do używania w grupie węzłów GFS.
 
 %prep
 %setup -q -n cluster-%{version}
-install -d %{name}/include/linux
-install %{name}-kernel/src/gnbd.h %{name}/include/linux
-
-cd %{name}
-%{__perl} -pi -e 's/-Wall/%{rpmcflags} -Wall/' make/defines.mk.input
-%{__perl} -pi -e 's/-O2 //' {client,server,tools/gnbd_{export,import}}/Makefile
 
 %build
-cd %{name}
 ./configure \
+	--cc="%{__cc}" \
+	--cflags="%{rpmcflags} -Wall" \
+	--ldflags="%{rpmldflags}" \
 	--incdir=%{_includedir} \
 	--libdir=%{_libdir} \
+	--libexecdir=%{_libdir} \
 	--mandir=%{_mandir} \
 	--prefix=%{_prefix} \
-	--sbindir=%{_sbindir}
-%{__make} \
-	CC="%{__cc}" \
-	INCLUDE="-I$PWD/include -I$PWD/include/linux -I$PWD/client \
-		-I$PWD/server -I$PWD/utils -I$PWD/config -I../gnbd_import"
+	--sbindir=%{_sbindir} \
+	--without_gfs \
+	--without_gfs2 \
+	--without_kernel_modules
+%{__make} -C %{name}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd %{name}
 
-%{__make} install \
+%{__make} -C %{name} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -60,5 +57,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_sbindir}/*
-%{_mandir}/man?/*
+%attr(755,root,root) %{_sbindir}/gnbd_*
+%{_mandir}/man8/gnbd*.8*
