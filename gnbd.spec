@@ -1,12 +1,14 @@
+# NOTE: obsolete, for 3rd generation cluster see cluster.spec
 Summary:	Block device driver to share storage to many machines over a network
 Summary(pl.UTF-8):	Sterownik urządzenia blokowego do dzielenia pamięci między maszynami w sieci
 Name:		gnbd
-Version:	2.03.10
+Version:	2.03.11
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	ftp://sources.redhat.com/pub/cluster/releases/cluster-%{version}.tar.gz
-# Source0-md5:	379b560096e315d4b52e238a5c72ba4a
+# Source0-md5:	712b9f583472d1de614641bc0f4a0aaf
+Patch0:		cluster-kernel.patch
 URL:		http://sources.redhat.com/cluster/gnbd/
 BuildRequires:	cman-devel >= 2.03.10
 BuildRequires:	perl-base
@@ -29,6 +31,7 @@ sterownik nadającym się do używania w grupie węzłów GFS.
 
 %prep
 %setup -q -n cluster-%{version}
+%patch0 -p1
 
 %build
 ./configure \
@@ -37,7 +40,7 @@ sterownik nadającym się do używania w grupie węzłów GFS.
 	--ldflags="%{rpmldflags}" \
 	--incdir=%{_includedir} \
 	--libdir=%{_libdir} \
-	--libexecdir=%{_libdir} \
+	--libexecdir=%{_libexecdir} \
 	--mandir=%{_mandir} \
 	--prefix=%{_prefix} \
 	--sbindir=%{_sbindir} \
